@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Gift Ideas for 5-Year-Old Boys</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --spacing-unit: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .intro {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .gift-list {
+            display: grid;
+            gap: 1.5rem;
+            padding: 1rem;
+        }
+
+        .gift-item {
+            background: var(--bg-secondary);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 2px 4px rgb(0 0 0 / 0.05);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .gift-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .gift-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .custom-checkbox {
+            position: relative;
+            width: 1.5rem;
+            height: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 1.5rem;
+            width: 1.5rem;
+            background-color: #fff;
+            border: 2px solid var(--primary-color);
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .custom-checkbox input:checked ~ .checkmark {
+            background-color: var(--primary-color);
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 8px;
+            top: 4px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .custom-checkbox input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .gift-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .gift-item.checked .gift-title {
+            text-decoration: line-through;
+            color: var(--text-secondary);
+        }
+
+        .description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-left: 2.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                margin: 1rem auto;
+            }
+            
+            .header {
+                padding: 1.5rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .gift-list {
+                gap: 1rem;
+            }
+
+            .gift-item {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Christmas Gift Ideas for 5-Year-Old Boys</h1>
+            <p class="intro">A curated list of popular Christmas gift ideas for 5-year-old boys. Check off items as you consider or purchase them!</p>
+        </header>
+
+        <div class="gift-list">
+            <div class="gift-item" data-gift-id="gift11">
+                <div class="gift-header">
+                    <div class="custom-checkbox">
+                        <input type="checkbox" id="gift11">
+                        <span class="checkmark"></span>
+                    </div>
+                    <span class="gift-title">Remote Control Monster Truck</span>
+                </div>
+                <p class="description">Heavy-duty RC monster truck with all-terrain wheels, perfect for indoor and outdoor play</p>
+            </div>
+
+            <!-- Other gift items... -->
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.gift-item').forEach(item => {
+            const checkbox = item.querySelector('input[type="checkbox"]');
+            
+            // Load saved state
+            const savedState = localStorage.getItem(checkbox.id);
+            if (savedState === 'true') {
+                checkbox.checked = true;
+                item.classList.add('checked');
+            }
+
+            // Handle clicks on the entire item
+            item.addEventListener('click', (e) => {
+                // Don't toggle if clicking the checkbox itself (it handles its own state)
+                if (e.target !== checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                    // Trigger the change event manually
+                    checkbox.dispatchEvent(new Event('change'));
+                }
+            });
+
+            // Handle checkbox changes
+            checkbox.addEventListener('change', (e) => {
+                localStorage.setItem(e.target.id, e.target.checked);
+                if (e.target.checked) {
+                    item.classList.add('checked');
+                } else {
+                    item.classList.remove('checked');
+                }
+            });
+
+            // Stop propagation on checkbox click to prevent double-toggle
+            checkbox.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>
